@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/*basic reset*/
+* {
+  margin: 0; 
+  padding: 0;
+}
+
+html {
+	height: 100%;
+	background: 
+		linear-gradient(rgba(46, 172, 255, 1), 
+      rgba(255, 255, 255, 0.6));
+}
+
+body {
+	font-family: Roboto, sans-serif;
+}
+
+.minha-app {
+  text-align: center;
+	position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.form-container {
+  margin: 0; 
+  padding: 20px 5px 5px 5px;
+  width: 25%;
+}
+
+.user-container {
+  margin: 0; 
+  padding: 20px 5px 5px 5px;
+  width: 40%;
+}
+
+#mform {
+	text-align: center;
+	position: relative;
+}
+
+#data {
+	text-align: center;
+	position: relative;
+}
+
+#mform fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 1 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	margin: 0;
+	position: relative;
+}
+
+#data fieldset {
+  background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 1 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	margin: 0;
+	position: relative;
+}
+
+#mform .input-nome {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 69%;
+	box-sizing: border-box;
+	color: #2C3E50;
+  margin-right: 2%;
+}
+
+#mform .input-idade {
+	padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 29%;
+	box-sizing: border-box;
+}
+
+#mform .action-button {
+	width: 100px;
+  text-align: center;
+	background: #2eabff;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+#mform .action-button:hover, #mform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #2eabff;
+}
+
+#mform .action-button-save {
+	width: 100px;
+  text-align: center;
+	background: #99CC32;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+#mform .action-button-save:hover, #mform .action-button-save:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #99CC32;
+}
+
+.title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+
+.subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 20px;
+}
+
+table{
+  width:100%;
+  table-layout: fixed;
+  animation: float 5s infinite;
+}
+
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+
+th {
+  color:#D5DDE5;
+  background:#1b1e24;
+  border-bottom:1px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  padding:12px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+tr {
+}
+
+tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
+}
+
+.tbl-content{
+  height:300px;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.tbl-content .action-button {
+  width: 60px;
+  text-align: center;
+	background: #2eabff;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+.tbl-content .action-button-del {
+  width: 60px;
+  text-align: center;
+	background: #e5665c;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+.tbl-content .action-button:hover, .tbl-content .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #2eabff;
+}
+
+.tbl-content .action-button-del:hover, .tbl-content .action-button-del:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #e5665c;
+}
+
+
+::-webkit-scrollbar {
+    width: 6px;
+} 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+} 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}

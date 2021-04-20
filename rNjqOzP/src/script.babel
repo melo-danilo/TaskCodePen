@@ -1,0 +1,270 @@
+class DataUser extends React.Component {
+  
+  handleRemoveClick(e) {
+    const { onRemove } = this.props
+    const { id, nome, idade } = this.props
+    
+    onRemove({id: id, nome: nome, idade: idade})
+  }
+  
+  handleEditClick(e) {
+    const { onEdit } = this.props
+    const { id, nome, idade } = this.props
+    
+    onEdit({id: id, nome: nome, idade: idade})
+  }
+  
+
+  render() {
+    const { id, nome, idade } = this.props;
+    return (
+      <React.Fragment>
+        <tr key={id}>
+          <td>{id}</td>
+          <td>{nome}</td>
+          <td>{idade}</td>
+          <td>
+            <input
+              type="submit"
+              name="edita"
+              class="submit action-button"
+              value="Editar"
+              onClick={ this.handleEditClick.bind(this) }
+            />
+            <input
+              type="submit"
+              name="remove"
+              class="submit action-button-del"
+              value="Excluir"
+              onClick={ this.handleRemoveClick.bind(this) }
+            />
+          </td>
+        </tr>
+      </React.Fragment>
+    );
+  }
+}
+
+class NewForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      setId: null,
+      setNome: null,
+      setIdade: null
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.edit) {
+      this.setState({
+        setId: nextProps.editUser.id,
+        setNome: nextProps.editUser.nome,
+        setIdade: nextProps.editUser.idade
+      });
+    }
+  }
+
+  handleChangeNome(e) {
+    const { setNome } = this.state;
+
+    this.setState({
+      setNome: e.target.value
+    });
+  }
+
+  handleChangeIdade(e) {
+    const { setIdade } = this.state;
+
+    this.setState({
+      setIdade: e.target.value
+    });
+  }
+
+  handleAdddUserClick(e) {
+    const { onNewUser } = this.props;
+    const { setNome, setIdade } = this.state;
+
+    onNewUser({ setNome: setNome, setIdade: setIdade });
+
+    this.setState({
+      setNome: "",
+      setIdade: ""
+    });
+  }
+
+  handleSalvarUsuarioClick(e) {
+    const { onEditUser, editUser } = this.props;
+    const { setId, setNome, setIdade } = this.state;
+
+    onEditUser({
+      setId: setId,
+      setNome: setNome,
+      setIdade: setIdade,
+      oldId: editUser.id,
+      oldNome: editUser.nome,
+      oldIdade: editUser.idade
+    });
+    this.setState({
+      setNome: "",
+      setIdade: ""
+    });
+  }
+
+  render() {
+    const { userEdit, edit } = this.props;
+    const { setId, setNome, setIdade } = this.state;
+    return (
+      <div className={"form-container"}>
+        <form id="mform">
+          <fieldset>
+            <h2 class="title">Evolutto</h2>
+            <h3 class="subtitle">Usuários</h3>
+            <input
+              id="inputNome"
+              type="text"
+              className="input-nome"
+              placeholder="Nome"
+              onChange={this.handleChangeNome.bind(this)}
+              value={setNome}
+            />
+            <input
+              id="inputIdade"
+              type="text"
+              className="input-idade"
+              placeholder="Idade"
+              onChange={this.handleChangeIdade.bind(this)}
+              value={setIdade}
+            />
+            {edit ? (
+              <input
+                type="button"
+                name="submit"
+                class="submit action-button-save"
+                value="Salvar"
+                onClick={this.handleSalvarUsuarioClick.bind(this)}
+              />
+            ) : (
+              <input
+                type="button"
+                name="submit"
+                class="submit action-button"
+                value="Adicionar"
+                onClick={this.handleAdddUserClick.bind(this)}
+              />
+            )}
+          </fieldset>
+        </form>
+      </div>
+    );
+  }
+}
+
+class MinhaApp extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      users: props.users,
+      count: 0
+    };
+  }
+
+  handleNewUser(user) {
+    const { users, count } = this.state;
+
+    users.push({
+      id: count + 1,
+      nome: user.setNome,
+      idade: user.setIdade
+    });
+
+    this.setState({ users: users, count: count + 1 });
+  }
+
+  handleClickEditUser(user) {
+    const { users } = this.state;
+
+    this.setState({ edit: true, editUser: user });
+  }
+
+  handleRemoveUser(user) {
+    const { users } = this.state;
+
+    let newUsers = users.filter(function (newUser) {
+      return newUser.id !== user.id;
+    });
+
+    this.setState({ users: newUsers, edit: null, editUser: null, setNome: "", setIdade: "" });
+  }
+
+  handleEditUser(user) {
+    const { users } = this.state;
+
+    let newUsers = users.map((newUser) => {
+      if (newUser.id == user.oldId) {
+        newUser.nome = user.setNome;
+        newUser.idade = user.setIdade;
+      }
+      return newUser;
+    });
+
+    this.setState({ edit: null, editUser: null, usuarios: newUsers });
+  }
+
+  render() {
+    const { setId, setNome, setIdade, edit, editUser, users } = this.state;
+    return (
+      <div className={"minha-app"}>
+        <NewForm
+          onNewUser={this.handleNewUser.bind(this)}
+          onEditUser={this.handleEditUser.bind(this)}
+          edit={edit}
+          editUser={editUser}
+        />
+
+        <div className={"user-container"}>
+          <div id="data">
+            <fieldset>
+              <h2 className={"title"}>Usuários</h2>
+              <div className={"tbl-header"}>
+                <table cellpadding="0" cellspacing="0" border="0">
+                  <thead>
+                    <tr>
+                      <th>id</th>
+                      <th>Nome</th>
+                      <th>Idade</th>
+                      <th>Ação</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+              <div className={"tbl-content"}>
+                <table cellpadding="0" cellspacing="0" border="0">
+                  <tbody>
+                    { this.state.users.map( (user) => {
+                        return <DataUser 
+                                 id={ user.id }
+                                 nome={ user.nome } 
+                                 idade={ user.idade }
+                                 onEdit={this.handleClickEditUser.bind(this)}
+                                 onRemove={ this.handleRemoveUser.bind(this) }
+                                 />
+                      } ) 
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+let users_data = [];
+
+container = document.getElementById("app");
+ReactDOM.render(<MinhaApp users={users_data} />, container);
